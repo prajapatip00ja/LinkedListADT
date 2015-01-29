@@ -3,3 +3,4 @@ ctest*
 *.exe
 *.exe.core
 *.o
+node_modules
