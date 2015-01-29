@@ -64,7 +64,7 @@ void addOne(void* data){
 	*(int*)data = *(int*)data+1;
 };
 
-void test_traverse_method_traverse_through_each_element_in_the_list(){
+void prepareData(){
 	int i = 7;
 	int j = 8;
 	int item = 1;
@@ -75,9 +75,90 @@ void test_traverse_method_traverse_through_each_element_in_the_list(){
 	LinkedList list = createList();
 	add_to_list(&list,node1);
 	add_to_list(&list,node2);
+}
+
+void test_traverse_method_traverse_through_each_element_in_the_list(){
+	int i = 7;
+	int j = 8;
+	void* data;
+	void (*fn_ptr)(void*) = &addOne;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
 	traverse(list,fn_ptr);
 	assertEqual(*(int*)(node1->data),8);
 	assertEqual(*(int*)(node2->data),9);
+}
+
+void test_getElemntAt_method_should_return_the_sepcefied_element(){
+	int i = 7;
+	int j = 8;
+	int index = 2;
+	void* data;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	data = getElementAt(list,index);
+	assertEqual(*(int*)data,8);
+}
+
+void test_indexof_method_should_return_the_index_of_sepcefied_element(){
+	int i = 7;
+	int j = 8;
+	int index;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	index = indexOf(list,node1->data);
+	assertEqual(index,0);
+}
+
+void test_indexof_method_should_return_the_minus_one_if_no_element_is_match(){
+	int i = 7;
+	int j = 8;
+	int item = 7;
+	int index;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	index = indexOf(list,(void*)&item);
+	assertEqual(index,-1);
+}
+
+void test_deleteElementAt_method_should_delete_element(){
+	int i = 7;
+	int j = 8;
+	int index = 1;
+	void* data;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	data =  deleteElementAt(list,index);
+	assertEqual(*(int*)data,8);
+}
+
+void test_deleteElementAt_method_should_delete_the_first_element(){
+	int i = 7;
+	int j = 8;
+	int index = 0;
+	void* data;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	data =  deleteElementAt(list,index);
+	assertEqual(*(int*)data,7);
 }
 
 

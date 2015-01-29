@@ -57,3 +57,50 @@ void traverse(LinkedList list,void (*addOne)(void* data)){
 			walker = walker->next; 
 	} 
 }
+
+void* getElementAt(LinkedList list, int i){
+	int count = 0;
+	node_ptr walker = list.head;
+	if(i>0){
+		while(count!=i-1){
+			walker = walker->next;
+			count++;
+		}
+		return walker->data;
+	}
+	else
+	return NULL;	
+}
+
+int indexOf(LinkedList list, void* data){
+	node_ptr walker = list.head;
+	int count = 0;
+	while(walker!=NULL){
+		if(walker->data == data){
+			return count;
+		}
+		else{
+			count++;
+			walker = walker->next;
+		}	
+	}
+	return -1;
+}
+void* deleteElementAt(LinkedList list, int i){
+	int count = 0;
+	node_ptr temp;
+	node_ptr walker = list.head;
+	if(i==0){
+		list.head = walker->next;
+		return walker->data;
+		list.count--;
+	}
+		while(count!=i-1){
+			walker = walker->next;
+			count++;
+		}
+		temp = walker->next;
+		walker->next = walker->next->next;
+		list.count--;
+	return temp->data;
+}
