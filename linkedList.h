@@ -30,6 +30,7 @@ void *get_first_element(LinkedList list);
 void *get_last_element(LinkedList list);
 void traverse(LinkedList,void (*addOne)(void* data));
 void* getElementAt(LinkedList list, int i);
-void prepareData();
 int indexOf(LinkedList list, void* data);
 void* deleteElementAt(LinkedList *list, int);
+int asArray(LinkedList, void **);
+LinkedList* filter(LinkedList, int (*fn_ptr)(void*));

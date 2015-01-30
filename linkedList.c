@@ -28,12 +28,10 @@ int add_to_list(LinkedList *list,Node *n){
 		list->count++;
 	}
 	else{
-		node_ptr walker = list->head;
-		while(walker->next!=NULL){
-			walker = walker->next;
-		}
-		walker->next = n;
+		node_ptr temp = list->tail;
 		list->tail = n;
+		temp->next = n;
+		list->tail->next = NULL;
 		list->count++;
 	}	
 	return 0;
@@ -86,6 +84,10 @@ int indexOf(LinkedList list, void* data){
 	}
 	return -1;
 }
+
+
+
+
 void* deleteElementAt(LinkedList *list, int i){
 	int count = 0;
 	node_ptr temp;
@@ -103,4 +105,31 @@ void* deleteElementAt(LinkedList *list, int i){
 		walker->next = walker->next->next;
 		list->count--;
 	return temp->data;
+}
+
+int asArray(LinkedList list,void** even){
+	int count = 0;
+	node_ptr walker = list.head;
+	while(walker!=NULL){
+		even[count] = walker->data;
+		walker = walker->next;
+		count++;
+	}
+	return count;
+}
+
+LinkedList* filter(LinkedList list, int (*fn_ptr)(void*)){
+	node_ptr walker = list.head;
+	linkedList_ptr list_ptr = (linkedList_ptr)malloc(sizeof(LinkedList));
+	list_ptr->head = NULL;
+	list_ptr->tail = NULL;
+	list_ptr->count = 0;
+
+	while(walker!=NULL){	
+		if((*fn_ptr)(walker->data)==1){
+			add_to_list(list_ptr, walker);
+		}
+		walker = walker->next;
+	}
+	 return list_ptr;
 }

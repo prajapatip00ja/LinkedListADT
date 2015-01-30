@@ -570,4 +570,140 @@ void test_deleteElementAt_method_should_delete_the_Structure_element(){
 	free(node2);
 }
 
+void prepareData(int *arr ,linkedList_ptr list_ptr){
+	node_ptr node1 = create_node((void*)arr);
+	node_ptr node2 = create_node((void*)arr+4);
+	node_ptr node3 = create_node((void*)arr+8);
+	add_to_list(list_ptr,node1);
+	add_to_list(list_ptr,node2);
+	printf("%d\n",*(int*)list_ptr->head->next->data);
+	add_to_list(list_ptr,node3);
+}
+
+// void test_asArray_method_will_populate_an_array_with_elment_of_list(){
+// 	int a[3] = {7,8,9};
+// 	int *even[3];
+// 	int noOfelement;
+// 	void* data;
+// 	LinkedList list = createList();
+// 	prepareData(a,&list);
+// 	noOfelement = asArray(list, (void **)even);
+// 	assertEqual(noOfelement,3);
+// 	assertEqual(*even[0],7);
+// 	assertEqual(*even[1],8);
+// 	assertEqual(*even[2],9);
+// }
+
+void test_asArray_method_will_populate_an_array_with_elment_of_list(){
+	int i = 7;
+	int j = 8;
+	int k = 9;
+	int *even[3];
+	int noOfelement;
+	void* data;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	node_ptr node3 = create_node((void*)&k);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	add_to_list(&list,node3);
+	noOfelement = asArray(list, (void **)even);
+	assertEqual(noOfelement,3);
+	assertEqual(*even[0],7);
+	assertEqual(*even[1],8);
+	assertEqual(*even[2],9);
+}
+
+int isMatch(void* data){
+	return (((*(int*)data)%2)==0);
+}
+
+void test_filter_method_will_fiter_the_element_of_list(){
+	int i = 6;
+	int j = 8;
+	int k = 9;
+	int (*fn_ptr)(void*) = &isMatch;
+	linkedList_ptr list_ptr;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	node_ptr node3 = create_node((void*)&k);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	add_to_list(&list,node3);
+	list_ptr = filter(list,isMatch);
+	assertEqual(*(int*)(list_ptr->head->data), 6);
+	assertEqual(*(int*)(list_ptr->head->next->data), 8);
+	free(node1);
+	free(node2);
+	free(node3);
+}
+
+int isMatch_char(void* data){
+	return ((*(char*)data)=='b');
+}
+
+void test_filter_method_will_fiter_the_element_of_list_char(){
+	char i = 'a';
+	char j = 'b';
+	char k = 'c';
+	int (*fn_ptr)(void*) = &isMatch_char;
+	linkedList_ptr list_ptr;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	node_ptr node3 = create_node((void*)&k);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	add_to_list(&list,node3);
+	list_ptr = filter(list,isMatch_char);
+	assertEqual(*(char*)(list_ptr->head->data),'b');
+	free(node1);
+	free(node2);
+	free(node3);
+}
+int isMatch_float(void* data){
+	float item = 2.0;
+	return *(float*)data==item;
+}
+
+void test_filter_method_will_fiter_the_element_of_list_float(){
+	float i = 1.0;
+	float j = 2.0;
+	float k = 3.0;
+	int (*fn_ptr)(void*) = &isMatch_float;
+	linkedList_ptr list_ptr;
+	node_ptr node1 = create_node((void*)&i);
+	node_ptr node2 = create_node((void*)&j);
+	node_ptr node3 = create_node((void*)&k);
+	LinkedList list = createList();
+	add_to_list(&list,node1);
+	add_to_list(&list,node2);
+	add_to_list(&list,node3);
+	list_ptr = filter(list,isMatch_float);
+	assertEqual((*(float*)(list_ptr->head->data)==2.0),1);
+	free(node1);
+	free(node2);
+	free(node3);
+}
+
+
+// void test_getElemntAt_method_should_return_the_sepcefied_element_of_type_double(){
+// 	double i = 7.00000;
+// 	double j = 8.00000;
+// 	int index = 1;
+// 	void* data;
+// 	node_ptr node1 = create_node((void*)&i);
+// 	node_ptr node2 = create_node((void*)&j);
+// 	LinkedList list = createList();
+// 	add_to_list(&list,node1);
+// 	add_to_list(&list,node2);
+// 	data = getElementAt(list,index);
+// 	assertEqual((*(double*)data==8.00000),1);
+// 	free(node1);
+// 	free(node2);
+// }
+
+
 
