@@ -2,6 +2,13 @@ typedef struct node Node;
 typedef struct linkedlist LinkedList;
 typedef Node* node_ptr;
 typedef LinkedList* linkedList_ptr;
+typedef struct student Student;
+typedef char* String;
+
+struct student {
+	int id;
+	char symbol;
+};
 
 struct node {
 	void* data;
@@ -25,4 +32,4 @@ void traverse(LinkedList,void (*addOne)(void* data));
 void* getElementAt(LinkedList list, int i);
 void prepareData();
 int indexOf(LinkedList list, void* data);
-void* deleteElementAt(LinkedList, int);
+void* deleteElementAt(LinkedList *list, int);

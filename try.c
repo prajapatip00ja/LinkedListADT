@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+typedef char* String;
 typedef struct Node node;
 typedef node* node_ptr;
 struct Node {
@@ -7,8 +9,7 @@ struct Node {
 };
 
 int main(){
-	int i = 10;
-	node_ptr n;
-	n->data = i;
-	printf("i = %d\n",n->data);
+	String i = "pooja";
+	String j = "pooja";
+	printf("i = %d\n",strcmp(i,j));
 }
